@@ -6,6 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { DetailsPage } from '../pages/details/details';
+import { GeoPage } from '../pages/geo/geo';
+import { WelcomePage } from '../pages/welcome/welcome';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { SQLiteObject } from '@ionic-native/sqlite';
@@ -16,7 +19,10 @@ import { CallNumber } from '@ionic-native/call-number';
 @NgModule({
     declarations: [
         MyApp,
-        HomePage
+        HomePage,
+        DetailsPage,
+        GeoPage,
+        WelcomePage
     ],
     imports: [
         BrowserModule,
@@ -25,7 +31,10 @@ import { CallNumber } from '@ionic-native/call-number';
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        HomePage
+        HomePage,
+        DetailsPage,
+        GeoPage,
+        WelcomePage
     ],
     providers: [
         StatusBar,
