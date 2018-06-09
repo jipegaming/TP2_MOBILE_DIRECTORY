@@ -11,7 +11,7 @@ import { GeoPage } from '../pages/geo/geo';
 import { WelcomePage } from '../pages/welcome/welcome';
 
 import { Geolocation } from '@ionic-native/geolocation';
-import { SQLiteObject } from '@ionic-native/sqlite';
+import { SQLite } from '@ionic-native/sqlite';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SMS } from '@ionic-native/sms';
 import { CallNumber } from '@ionic-native/call-number';
@@ -40,7 +40,7 @@ import { CallNumber } from '@ionic-native/call-number';
         StatusBar,
         SplashScreen,
         Geolocation,
-        SQLiteObject,
+        SQLite,
         InAppBrowser,
         SMS,
         CallNumber,
