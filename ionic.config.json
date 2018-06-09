@@ -1,0 +1,8 @@
+{
+  "name": "TCC_DIRECTORY",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
