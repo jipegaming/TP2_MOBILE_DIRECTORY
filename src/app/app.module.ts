@@ -16,6 +16,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SMS } from '@ionic-native/sms';
 import { CallNumber } from '@ionic-native/call-number';
 
+import { TccDirectoryService } from '../services/tccdirectory.service';
+import { HttpModule } from '@angular/http'
+
 @NgModule({
     declarations: [
         MyApp,
@@ -26,7 +29,8 @@ import { CallNumber } from '@ionic-native/call-number';
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        HttpModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -37,6 +41,7 @@ import { CallNumber } from '@ionic-native/call-number';
         WelcomePage
     ],
     providers: [
+        TccDirectoryService,
         StatusBar,
         SplashScreen,
         Geolocation,
