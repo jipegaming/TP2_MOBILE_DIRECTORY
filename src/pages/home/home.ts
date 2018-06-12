@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+
+import { WelcomePage } from '../welcome/welcome';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +11,8 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(private platform: Platform, public navCtrl: NavController, private sqlite: SQLite, private iab: InAppBrowser) {
+    this.navCtrl.setRoot(WelcomePage);
   }
-
+  
 }
