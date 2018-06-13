@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform } from 'ionic-angular';
 
-// import { BusinessesGlobal } from '../../models/businesses-global.model';
-// import { SkillsGlobal } from '../../models/skills-global.model';
 import { TccDirectoryService } from '../../services/tccdirectory.service';
 
 @Component({
@@ -10,11 +8,6 @@ import { TccDirectoryService } from '../../services/tccdirectory.service';
     templateUrl: 'home.html'
 })
 export class HomePage {
-
-    // listBusinesses: BusinessesGlobal = new BusinessesGlobal();
-    // listBusinesses = [];
-    // listSkills: SkillsGlobal = new SkillsGlobal();
-    // displaySkills = false;
 
     // Concernant les Businesses
     dataBus: any;
@@ -24,24 +17,14 @@ export class HomePage {
     perPage = 0;
     totalData = 0;
     totalPage = 0;
-
     // Concernant le Menu Toogle
     activeMenu: string;
 
-    // Concernant les Skills
-    dataSki: any;
-    skills: string[];
+    constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private tccDirectoryService: TccDirectoryService) {
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private tccDirectoryService: TccDirectoryService) {
-
-        this.getListBusinesses();
-        this.getListSkills();
-        // this.tccDirectoryService.getListSkills()
-        //     .then(businessesFetched => {
-        //         this.listSkills = businessesFetched;
-        //         console.log("HomePage getListSkills", this.listSkills);
-        //     });
-
+        platform.ready().then(() => {
+            this.getListBusinesses();
+        });
     }
 
     getListBusinesses() {
@@ -83,24 +66,7 @@ export class HomePage {
                     error => this.errorMessage = <any>error);
             console.log('Async operation has ended');
             infiniteScroll.complete();
-        }, 500);
+        }, 1000);
     }
-
-    getListSkills() {
-        this.tccDirectoryService.getListSkills()
-            .subscribe(
-                res => {
-                    this.dataSki = res;
-                    console.log("HomePage/dataSki", res);
-                    this.skills = this.dataSki.data;
-                    console.log("HomePage/skills", this.dataSki.data);
-                },
-                error => this.errorMessage = <any>error);
-    }
-
-    // updateDisplaySkills() {
-    //     if (this.displaySkills) this.displaySkills = false;
-    //     else this.displaySkills = true;
-    // }
 
 }

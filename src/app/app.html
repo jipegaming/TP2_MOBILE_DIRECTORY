@@ -7,9 +7,9 @@
     </ion-header>
 
     <ion-content>
-        <ion-list>
+        <ion-list *ngFor="let skill of skills">
             <ion-item>
-                <ion-label>Daeneris Targarien</ion-label>
+                <ion-label>{{ skill.name }}</ion-label>
                 <ion-checkbox checked="true"></ion-checkbox>
             </ion-item>
         </ion-list>

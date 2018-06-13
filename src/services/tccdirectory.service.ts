@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class TccDirectoryService {
 
     private businessesUrl = 'http://tccdirectory.1click.pf/api/businesses';
-    private skillsUrl: string = 'http://tccdirectory.1click.pf/api/skills';
+    private skillsUrl = 'http://tccdirectory.1click.pf/api/skills';
 
     constructor(public http: Http) {
 
@@ -30,14 +30,6 @@ export class TccDirectoryService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
-    // public getListSkills(): Promise<any> {
-    //     const url = `${this.skillsUrl}`;
-    //     return this.http.get(url)
-    //         .toPromise()
-    //         .then(response => response.json() as SkillsGlobal)
-    //         .catch(error => console.log('Une erreur est survenue ' + error))
-    // }
 
     private extractData(res: Response) {
         let body = res.json();

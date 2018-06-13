@@ -4,19 +4,36 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { TccDirectoryService } from '../services/tccdirectory.service';
 @Component({
-  templateUrl: 'app.html'
+    templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+    rootPage: any = HomePage;
+    // Concernant les Skills
+    dataSki: any;
+    skills: string[];
+    errorMessage: string;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
-  }
+    constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private tccDirectoryService: TccDirectoryService) {
+        platform.ready().then(() => {
+            statusBar.styleDefault();
+            splashScreen.hide();
+            this.getListSkills();
+        });
+    }
+
+    getListSkills() {
+        this.tccDirectoryService.getListSkills()
+            .subscribe(
+                res => {
+                    this.dataSki = res;
+                    console.log("HomePage/dataSki", res);
+                    this.skills = this.dataSki.data;
+                    console.log("HomePage/skills", this.dataSki.data);
+                },
+                error => this.errorMessage = <any>error);
+    }
+
 }
 
