@@ -1,22 +1,48 @@
 <ion-header>
+
     <ion-navbar>
+
         <ion-title>
-            Liste des entreprises
+            Filtre
         </ion-title>
+
     </ion-navbar>
+
 </ion-header>
 
 <ion-content>
+
+    <ion-fab top right edge>
+        <button ion-fab mini (tap)="updateDisplaySkills()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+    <ion-list *ngIf="displaySkills" padding>
+        <ion-badge *ngFor="let listSkill of listSkills.data">
+            {{ listSkill.name }}
+            <ion-checkbox checked="false"></ion-checkbox>
+        </ion-badge>
+    </ion-list>
+
+    <!-- <div *ngIf="displaySkills" padding>
+        <ion-badge *ngFor="let listSkill of listSkills.data">
+                {{ listSkill.name }}
+        </ion-badge>
+    </div> -->
+
     <ion-list>
-        <ion-item-sliding *ngFor="let listing of list.data" >
+        <ion-item-sliding *ngFor="let listBusiness of listBusinesses">
             <ion-item>
                 <ion-avatar item-start>
-                    <img src="{{ listing.logo }}">
+                    <img src="{{ listBusiness.logo }}">
                 </ion-avatar>
-                <h2>{{ listing.name }}</h2>
+                <h2>{{ listBusiness.name }}</h2>
+                <h3 *ngFor="let listSkill of listBusiness.skills" >{{ listSkill.name  }}</h3>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button color="light">
+                    <ion-icon name="information-circle"></ion-icon>
                     Plus...
                 </button>
                 <button ion-button color="primary">
@@ -30,4 +56,9 @@
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
 </ion-content>
