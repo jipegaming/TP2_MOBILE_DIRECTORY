@@ -42,7 +42,7 @@ export class HomePage {
         return new Promise((resolve) => {
             setTimeout(() => {
                 this.tccDirectoryService.getListBusinesses()
-                    .then(businessesFetched => {
+                    .then((businessesFetched) => {
                         let businessesT = businessesFetched.data;
                         console.log("doInfinite getListBusinesses businessesT", businessesT);
                         this.listBusinesses.concat(businessesT);
@@ -51,7 +51,7 @@ export class HomePage {
                     });
                 console.log('Async operation has ended');
                 resolve();
-            }, 500);
+            }, 50);
         })
     }
 

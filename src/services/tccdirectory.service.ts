@@ -22,7 +22,7 @@ export class TccDirectoryService {
         return this.http.get(url)
             .toPromise()
             .then((response) => {
-        console.log("getListBusinesses",url);
+                console.log("getListBusinesses", url);
                 this.businessesUrl = response.json().next_page_url;
                 return response.json() as BusinessesGlobal;
             })
