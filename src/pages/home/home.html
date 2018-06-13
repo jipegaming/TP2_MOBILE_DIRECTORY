@@ -1,18 +1,51 @@
 <ion-header>
 
     <ion-navbar>
-
+        <button ion-button [menuToggle]="activeMenu">
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-title>
-            Filtre
+            Entreprise
         </ion-title>
-
     </ion-navbar>
 
 </ion-header>
 
 <ion-content>
 
-    <ion-fab top right edge>
+    <ion-list>
+        <ion-item-sliding *ngFor="let business of businesses">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="{{ business.logo }}">
+                </ion-avatar>
+                <h2>{{ business.name }}</h2>
+                <ion-badge color="light" *ngFor="let skill of business.skills">{{ skill.name }}</ion-badge>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="primary">
+                    <ion-icon name="text"></ion-icon>
+                    Sms
+                </button>
+                <button ion-button color="secondary">
+                    <ion-icon name="call"></ion-icon>
+                    Call
+                </button>
+                <button ion-button color="light">
+                    <ion-icon name="information-circle"></ion-icon>
+                    Plus...
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPage">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>
+
+<!-- <ion-fab top right edge>
         <button ion-fab mini (tap)="updateDisplaySkills()">
             <ion-icon name="add"></ion-icon>
         </button>
@@ -23,42 +56,4 @@
             {{ listSkill.name }}
             <ion-checkbox checked="false"></ion-checkbox>
         </ion-badge>
-    </ion-list>
-
-    <!-- <div *ngIf="displaySkills" padding>
-        <ion-badge *ngFor="let listSkill of listSkills.data">
-                {{ listSkill.name }}
-        </ion-badge>
-    </div> -->
-
-    <ion-list>
-        <ion-item-sliding *ngFor="let listBusiness of listBusinesses">
-            <ion-item>
-                <ion-avatar item-start>
-                    <img src="{{ listBusiness.logo }}">
-                </ion-avatar>
-                <h2>{{ listBusiness.name }}</h2>
-                <h3 *ngFor="let listSkill of listBusiness.skills" >{{ listSkill.name  }}</h3>
-            </ion-item>
-            <ion-item-options side="right">
-                <button ion-button color="light">
-                    <ion-icon name="information-circle"></ion-icon>
-                    Plus...
-                </button>
-                <button ion-button color="primary">
-                    <ion-icon name="text"></ion-icon>
-                    SMS
-                </button>
-                <button ion-button color="secondary">
-                    <ion-icon name="call"></ion-icon>
-                    APPEL
-                </button>
-            </ion-item-options>
-        </ion-item-sliding>
-    </ion-list>
-
-    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
-</ion-content>
+    </ion-list> -->

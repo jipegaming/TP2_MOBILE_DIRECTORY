@@ -1,40 +1,60 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { BusinessesGlobal } from '../models/businesses-global.model';
-import { SkillsGlobal } from '../models/skills-global.model';
+// import { BusinessesGlobal } from '../models/businesses-global.model';
+// import { SkillsGlobal } from '../models/skills-global.model';
 
 @Injectable()
 export class TccDirectoryService {
 
-    private businessesUrl: string = 'http://tccdirectory.1click.pf/api/businesses';
+    private businessesUrl = 'http://tccdirectory.1click.pf/api/businesses';
     private skillsUrl: string = 'http://tccdirectory.1click.pf/api/skills';
 
-    constructor(private http: Http) {
+    constructor(public http: Http) {
 
     }
 
-    public getListBusinesses(): Promise<any> {
-        const url = `${this.businessesUrl}`;
-        return this.http.get(url)
-            .toPromise()
-            .then((response) => {
-                console.log("getListBusinesses", url);
-                this.businessesUrl = response.json().next_page_url;
-                return response.json() as BusinessesGlobal;
-            })
-            .catch(error => console.log('getListBusinesses Une erreur est survenue ' + error))
+    getListBusinesses(page): Observable<string[]> {
+        return this.http.get(this.businessesUrl + "?page=" + page)
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 
-    public getListSkills(): Promise<any> {
-        const url = `${this.skillsUrl}`;
-        return this.http.get(url)
-            .toPromise()
-            .then(response => response.json() as SkillsGlobal)
-            .catch(error => console.log('Une erreur est survenue ' + error))
+    getListSkills(): Observable<string[]> {
+        return this.http.get(this.skillsUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    // public getListSkills(): Promise<any> {
+    //     const url = `${this.skillsUrl}`;
+    //     return this.http.get(url)
+    //         .toPromise()
+    //         .then(response => response.json() as SkillsGlobal)
+    //         .catch(error => console.log('Une erreur est survenue ' + error))
+    // }
+
+    private extractData(res: Response) {
+        let body = res.json();
+        return body || {};
+    }
+
+    private handleError(error: Response | any) {
+        let errMsg: string;
+        if (error instanceof Response) {
+            const body = error.json() || '';
+            const err = body.error || JSON.stringify(body);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable.throw(errMsg);
     }
 
 }
