@@ -21,6 +21,7 @@
                 </ion-avatar>
                 <h2>{{ business.name }}</h2>
                 <ion-badge color="light" *ngFor="let skill of business.skills">{{ skill.name }}</ion-badge>
+                <ion-icon name="arrow-dropleft" item-end></ion-icon>
             </ion-item>
             <ion-item-options side="right">
                 <button ion-button color="primary">
@@ -31,7 +32,7 @@
                     <ion-icon name="call"></ion-icon>
                     Call
                 </button>
-                <button ion-button color="light">
+                <button ion-button color="light" (click)="push(business.id)">
                     <ion-icon name="information-circle"></ion-icon>
                     Plus...
                 </button>

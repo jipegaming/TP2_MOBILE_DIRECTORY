@@ -28,9 +28,9 @@ export class MyApp {
             .subscribe(
                 res => {
                     this.dataSki = res;
-                    console.log("HomePage/dataSki", res);
+                    console.log("AppComp/dataSki", res);
                     this.skills = this.dataSki.data;
-                    console.log("HomePage/skills", this.dataSki.data);
+                    console.log("AppComp/skills", this.dataSki.data);
                 },
                 error => this.errorMessage = <any>error);
     }

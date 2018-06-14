@@ -2,18 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-// import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-
-// import { BusinessesGlobal } from '../models/businesses-global.model';
-// import { SkillsGlobal } from '../models/skills-global.model';
 
 @Injectable()
 export class TccDirectoryService {
 
     private businessesUrl = 'http://tccdirectory.1click.pf/api/businesses';
     private skillsUrl = 'http://tccdirectory.1click.pf/api/skills';
+    private detailsUrl = 'http://tccdirectory.1click.pf/api/business/';
 
     constructor(public http: Http) {
 
@@ -27,6 +24,12 @@ export class TccDirectoryService {
 
     getListSkills(): Observable<string[]> {
         return this.http.get(this.skillsUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getListDetails(id): Observable<string[]> {
+        return this.http.get(this.detailsUrl + id)
             .map(this.extractData)
             .catch(this.handleError);
     }

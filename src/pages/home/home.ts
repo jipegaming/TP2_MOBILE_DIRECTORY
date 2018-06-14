@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
 
+import { DetailsPage } from '../../pages/details/details';
 import { TccDirectoryService } from '../../services/tccdirectory.service';
 
 @Component({
@@ -17,10 +18,12 @@ export class HomePage {
     perPage = 0;
     totalData = 0;
     totalPage = 0;
-    // Concernant le Menu Toogle
-    activeMenu: string;
+    // Push vers Details (plus...)
+    push(businessId) {
+        this.navCtrl.push(DetailsPage, {'id':businessId});
+    }
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private tccDirectoryService: TccDirectoryService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, private tccDirectoryService: TccDirectoryService) {
 
         platform.ready().then(() => {
             this.getListBusinesses();
