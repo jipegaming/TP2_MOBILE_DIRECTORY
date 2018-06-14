@@ -9,7 +9,7 @@
     <ion-list>
         <ion-item>
             <ion-label>Filtre</ion-label>
-            <ion-select [(ngModel)]="filtre" multiple="true" cancelText="Uch..." okText="Go!">
+            <ion-select [(ngModel)]="filtre" multiple="true" (ionChange)="postSearch(filtre)">
                 <ion-option *ngFor="let skill of skills" value="{{ skill.id }}" selected="false">
                     {{ skill.name }}
                 </ion-option>
@@ -48,7 +48,7 @@
         </ion-item-sliding>
     </ion-list>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPage">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page < totalPage && displayMode == 'normal'">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
