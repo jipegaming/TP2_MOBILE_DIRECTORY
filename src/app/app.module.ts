@@ -5,11 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-// import { HomePage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
 import { DetailsPage } from '../pages/details/details';
 import { GeoPage } from '../pages/geo/geo';
 import { WelcomePage } from '../pages/welcome/welcome';
-import { HomePageModule } from '../pages/home/home.module';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { SQLite } from '@ionic-native/sqlite';
@@ -23,7 +22,7 @@ import { HttpModule } from '@angular/http'
 @NgModule({
     declarations: [
         MyApp,
-        // HomePage,
+        HomePage,
         DetailsPage,
         GeoPage,
         WelcomePage
@@ -31,13 +30,12 @@ import { HttpModule } from '@angular/http'
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp),
-        HttpModule,
-        HomePageModule
+        HttpModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        // HomePage,
+        HomePage,
         DetailsPage,
         GeoPage,
         WelcomePage

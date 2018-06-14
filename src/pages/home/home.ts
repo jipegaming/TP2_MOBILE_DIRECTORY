@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 
 import { DetailsPage } from '../../pages/details/details';
 import { TccDirectoryService } from '../../services/tccdirectory.service';
@@ -20,13 +20,17 @@ export class HomePage {
     totalPage = 0;
     // Push vers Details (plus...)
     push(businessId) {
-        this.navCtrl.push(DetailsPage, {'id':businessId});
+        this.navCtrl.push(DetailsPage, { 'id': businessId });
     }
+    // Concernant les Skills
+    dataSki: any;
+    skills: string[];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, private tccDirectoryService: TccDirectoryService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public alertCtrl: AlertController, private tccDirectoryService: TccDirectoryService) {
 
         platform.ready().then(() => {
             this.getListBusinesses();
+            this.getListSkills();
         });
     }
 
@@ -70,6 +74,27 @@ export class HomePage {
             console.log('Async operation has ended');
             infiniteScroll.complete();
         }, 1000);
+    }
+
+    getListSkills() {
+        this.tccDirectoryService.getListSkills()
+            .subscribe(
+                res => {
+                    this.dataSki = res;
+                    console.log("HomePage/dataSki", res);
+                    this.skills = this.dataSki.data;
+                    console.log("HomePage/skills", this.dataSki.data);
+                },
+                error => this.errorMessage = <any>error);
+    }
+
+    postSearch() {
+        this.tccDirectoryService.postSearch(this.skills)
+            .subscribe(
+                res => {
+                    console.log("HomePage", res);
+                },
+                error => this.errorMessage = <any>error);
     }
 
 }

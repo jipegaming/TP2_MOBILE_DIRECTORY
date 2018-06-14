@@ -35,7 +35,7 @@ export class TccDirectoryService {
             .catch(this.handleError);
     }
 
-    getSearch(skillsId): Observable<string[]> {
+    postSearch(skillsId): Observable<string[]> {
         return this.http.post(this.searchUrl,{ "skills" : skillsId})
             .map(this.extractData)
             .catch(this.handleError);
