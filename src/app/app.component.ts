@@ -35,5 +35,15 @@ export class MyApp {
                 error => this.errorMessage = <any>error);
     }
 
+    getSearch() {
+        this.tccDirectoryService.getSearch()
+            .subscribe(
+                res => {
+
+                }
+                error => this.errorMessage = <any>error);
+            )
+    }
+
 }
 

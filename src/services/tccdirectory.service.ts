@@ -11,6 +11,7 @@ export class TccDirectoryService {
     private businessesUrl = 'http://tccdirectory.1click.pf/api/businesses';
     private skillsUrl = 'http://tccdirectory.1click.pf/api/skills';
     private detailsUrl = 'http://tccdirectory.1click.pf/api/business/';
+    private searchUrl = 'http://tccdirectory.1click.pf/api/search';
 
     constructor(public http: Http) {
 
@@ -30,6 +31,12 @@ export class TccDirectoryService {
 
     getListDetails(id): Observable<string[]> {
         return this.http.get(this.detailsUrl + id)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    getSearch(skillsId): Observable<string[]> {
+        return this.http.post(this.searchUrl,{ "skills" : skillsId})
             .map(this.extractData)
             .catch(this.handleError);
     }
