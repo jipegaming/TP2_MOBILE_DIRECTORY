@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-
-import { HomePage } from '../home/home';
-
-let progress = 0;
+import { HomePage } from '../../pages/home/home';
 @Component({
     selector: 'page-welcome',
     templateUrl: 'welcome.html',
@@ -13,10 +9,9 @@ let progress = 0;
 })
 export class WelcomePage {
 
-    database: SQLiteObject;
-    progress: any;
+    progress = 0;
 
-    constructor(private platform: Platform, public navCtrl: NavController, public navParams: NavParams, private sqlite: SQLite) {
+    constructor(private platform: Platform, public navCtrl: NavController) {
         this.platform.ready().then(() => {
             this.redirectToHome();
         })
@@ -33,10 +28,10 @@ export class WelcomePage {
             counter++;
             console.log('count', counter);
             this.progress = counter * 100 / limit;
-            console.log('progress', progress);
+            console.log('progress', this.progress);
             if (counter == limit) {
                 clearInterval(myInternal);
-                this.navCtrl.push(HomePage)
+                this.navCtrl.push(HomePage);
             }
         }, 1000);
     }
