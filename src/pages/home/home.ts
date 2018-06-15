@@ -27,6 +27,8 @@ export class HomePage {
     skills: string[];
     filtre: any;
     displayMode = "normal";
+    // Concernant les Details
+    dataDet = ['name'];
 
     constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public alertCtrl: AlertController, private tccDirectoryService: TccDirectoryService) {
 
@@ -37,7 +39,7 @@ export class HomePage {
     }
 
     getListBusinesses() {
-        console.log("getListBusinesses this.displayMode",this.displayMode);
+        console.log("getListBusinesses this.displayMode", this.displayMode);
         this.tccDirectoryService.getListBusinesses(this.page)
             .subscribe(
                 res => {
@@ -56,27 +58,27 @@ export class HomePage {
     }
 
     doInfinite(infiniteScroll) {
-            this.page = this.page + 1;
-            setTimeout(() => {
-                this.tccDirectoryService.getListBusinesses(this.page)
-                    .subscribe(
-                        res => {
-                            this.dataBus = res;
-                            console.log("HomePage/dataBus", res);
-                            this.perPage = this.dataBus.per_page;
-                            console.log("HomePage/perPage", this.dataBus.per_page);
-                            this.totalData = this.dataBus.total;
-                            console.log("HomePage/totalData", this.dataBus.total);
-                            this.totalPage = this.dataBus.last_page;
-                            console.log("HomePage/totalPage", this.dataBus.last_page);
-                            for (let i = 0; i < this.dataBus.data.length; i++) {
-                                this.businesses.push(this.dataBus.data[i]);
-                            }
-                        },
-                        error => this.errorMessage = <any>error);
-                console.log('Async operation has ended');
-                infiniteScroll.complete();
-            }, 1000);
+        this.page = this.page + 1;
+        setTimeout(() => {
+            this.tccDirectoryService.getListBusinesses(this.page)
+                .subscribe(
+                    res => {
+                        this.dataBus = res;
+                        console.log("HomePage/dataBus", res);
+                        this.perPage = this.dataBus.per_page;
+                        console.log("HomePage/perPage", this.dataBus.per_page);
+                        this.totalData = this.dataBus.total;
+                        console.log("HomePage/totalData", this.dataBus.total);
+                        this.totalPage = this.dataBus.last_page;
+                        console.log("HomePage/totalPage", this.dataBus.last_page);
+                        for (let i = 0; i < this.dataBus.data.length; i++) {
+                            this.businesses.push(this.dataBus.data[i]);
+                        }
+                    },
+                    error => this.errorMessage = <any>error);
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+        }, 1000);
     }
 
     getListSkills() {
@@ -105,8 +107,8 @@ export class HomePage {
                                 this.businesses.push(res[i]);
                             }
                         }
-                        console.log("postSearch this.businesses",this.businesses);
-                        console.log("postSearch this.displayMode",this.displayMode);
+                        console.log("postSearch this.businesses", this.businesses);
+                        console.log("postSearch this.displayMode", this.displayMode);
                     },
                     error => this.errorMessage = <any>error);
         } else {

@@ -50,11 +50,11 @@ export class DetailsPage {
 
     envoiAppel() {
         this.callNumber.callNumber(this.dataDet['phone'], true)
-        .then(res => {
-            console.log('OK appel', res)
-        }) .catch(err => {
-            console.log(JSON.stringify, err);
-        })
+            .then(res => {
+                console.log('OK appel', res)
+            }).catch(err => {
+                console.log(JSON.stringify, err);
+            })
     }
 
     envoiSms() {
@@ -65,11 +65,11 @@ export class DetailsPage {
             }
         }
         this.sms.send(this.dataDet['phone'], 'Message', options)
-        .then(res => {
-            console.log('OK sms', res);
-        }) .catch((err) => {
-            alert(JSON.stringify(err))
-        })
+            .then(res => {
+                console.log('OK sms', res);
+            }).catch((err) => {
+                alert(JSON.stringify(err))
+            })
     }
 
 }
