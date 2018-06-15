@@ -1,8 +1,8 @@
 {
   "name": "TCC_DIRECTORY",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Jipé Gaming",
+  "homepage": "https://www.youtube.com/channel/UC9ojW7qOYL0OzthkIshXw5g",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -42,7 +42,7 @@
     "@ionic/app-scripts": "3.1.9",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project",
+  "description": "TCC MOBILE DIRECTORY",
   "cordova": {
     "plugins": {
       "cordova-plugin-geolocation": {
