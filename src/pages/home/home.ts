@@ -30,7 +30,13 @@ export class HomePage {
     // Concernant les Details
     dataDet = ['name'];
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, platform: Platform, public alertCtrl: AlertController, private tccDirectoryService: TccDirectoryService) {
+    constructor(
+
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        platform: Platform,
+        public alertCtrl: AlertController,
+        private tccDirectoryService: TccDirectoryService) {
 
         platform.ready().then(() => {
             this.getListBusinesses();
